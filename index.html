@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arxsensi - Gaming Interface</title>
+  <style>
+    body {
+      font-family: 'Press Start 2P', cursive;
+      background: #1d1f21; /* Dark background for gaming look */
+      color: white;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 40px;
+      color: #ff6347; /* Neon orange */
+      text-shadow: 2px 2px 8px rgba(255, 99, 71, 0.8);
+    }
+
+    .login-box, .panel-box {
+      background: linear-gradient(45deg, #ff0000, #ff6347); /* Neon gradient */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 99, 71, 0.8);
+      width: 300px;
+      text-align: center;
+      opacity: 0.9;
+      display: none; /* Hidden by default */
+    }
+
+    .login-box.active, .panel-box.active {
+      display: block; /* Visible when active */
+    }
+
+    input[type="text"], input[type="password"], button {
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      color: #fff;
+      background-color: #333;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    input[type="text"]:focus, input[type="password"]:focus, button:hover {
+      background-color: #ff6347; /* Highlight on focus/hover */
+      box-shadow: 0 0 10px rgba(255, 99, 71, 0.8);
+    }
+
+    button {
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .toggle-option {
+      display: flex;
+      justify-content: space-between;
+      margin: 8px 0;
+      font-size: 18px;
+      font-weight: normal;
+    }
+
+    #message {
+      color: red;
+      margin-top: 10px;
+    }
+
+    #applyMessage {
+      color: green;
+      margin-top: 10px;
+    }
+
+    .neon-text {
+      color: #ff6347;
+      text-shadow: 0 0 8px #ff6347, 0 0 20px #ff6347, 0 0 30px #ff6347;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="neon-text">Arxsensi</h1>
+
+  <!-- Login Box -->
+  <div class="login-box active" id="loginBox">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <p id="message"></p>
+  </div>
+
+  <!-- Free Fire Optimizer Panel -->
+  <div class="panel-box" id="panelBox">
+    <h2>Free Fire Sensi Optimizer</h2>
+    <div class="toggle-option">
+      <label for="sensiX">Sensi X</label>
+      <input type="checkbox" id="sensiX">
+    </div>
+    <div class="toggle-option">
+      <label for="sensiY">Sensi Y</label>
+      <input type="checkbox" id="sensiY">
+    </div>
+    <div class="toggle-option">
+      <label for="aimbot">Aimbot</label>
+      <input type="checkbox" id="aimbot">
+    </div>
+    <div class="toggle-option">
+      <label for="aimlock">Aimlock</label>
+      <input type="checkbox" id="aimlock">
+    </div>
+    <div class="toggle-option">
+      <label for="recoil">Reduce Recoil</label>
+      <input type="checkbox" id="recoil">
+    </div>
+    <button onclick="applySettings()">Apply</button>
+    <p id="applyMessage"></p>
+    <button onclick="openGame()">Play Game</button>
+  </div>
+
+  <script>
+    function login() {
+      var user = document.getElementById("username").value;
+      var pass = document.getElementById("password").value;
+
+      // Check if login credentials are correct
+      if (user === "Arxsensi" && pass === "w16") {
+        // On successful login, hide the login box and show the panel
+        document.getElementById("loginBox").classList.remove("active");
+        document.getElementById("panelBox").classList.add("active");
+      } else {
+        // Show error message for invalid credentials
+        document.getElementById("message").innerText = "Invalid credentials.";
+      }
+    }
+
+    function applySettings() {
+      const settings = {
+        sensiX: document.getElementById("sensiX").checked,
+        sensiY: document.getElementById("sensiY").checked,
+        aimbot: document.getElementById("aimbot").checked,
+        aimlock: document.getElementById("aimlock").checked,
+        recoil: document.getElementById("recoil").checked,
+      };
+
+      console.log("Applied settings:", settings);
+      document.getElementById("applyMessage").innerText = "Settings applied successfully!";
+    }
+
+    function openGame() {
+      // Attempt to open the game using a deep link (for Android)
+      window.location.href = "gameapp://launch";
+
+      // Fallback to Play Store if the game is not installed
+      setTimeout(() => {
+        window.location.href = "https://play.google.com/store/apps/details?id=com.dts.freefireth";
+      }, 2000);
+    }
+  </script>
+
+</body>
+</html>
